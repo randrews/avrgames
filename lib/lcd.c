@@ -240,6 +240,20 @@ void lcd_hline(int x0, int x1, int y, uint16_t color){
     lcdselect(1, 0);    
 }
 
+void lcd_rect(int left, int top, int right, int bottom, uint16_t color){
+    lcd_window(left, top, right, bottom);
+    lcdselect(0, 1);
+    byte h = color >> 8;
+
+    for(int y=top; y <= bottom; y++){
+        for(int x=left; x <= right; x++){
+            spi(h);
+            spi(color);
+        }
+    }
+    lcdselect(1, 0);
+}
+
 void lcd_blit(int x, int y, int w, int h,
               byte *bitmap,
               uint16_t col0, uint16_t col1, byte drawmode){

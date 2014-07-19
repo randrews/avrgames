@@ -4,7 +4,7 @@
 
 #include "diskio.h"
 #include "../sd.h"
-#include "../pins.h"
+#include "../../pins.h"
 #include <avr/io.h>
 
 DSTATUS disk_initialize (void)

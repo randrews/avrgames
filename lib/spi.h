@@ -3,7 +3,7 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include "pins.h"
+#include "../pins.h"
 
 typedef unsigned char byte;
 

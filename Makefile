@@ -1,6 +1,6 @@
 CHIP=atmega1284p
 MHZ=20
-UTILS=spi sd pff/diskio pff/pff uart ram lcd
+UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/uart lib/ram lib/lcd
 APP=tinysd
 ##########
 
@@ -19,13 +19,13 @@ all: ${APP}.hex ${APP}.bin
 .c.o:
 	avr-gcc ${GCC_ARGS} -c $< -o $@
 
-.c: *.h pff/*.h
+.c: lib/*.h lib/pff/*.h
 
 ${APP}.elf: ${APP}.o ${UTILS:=.o}
-	avr-gcc ${GCC_ARGS} -o $@ *.o pff/*.o
+	avr-gcc ${GCC_ARGS} -o $@ *.o lib/*.o lib/pff/*.o
 
 clean:
-	rm -f *.o *.elf *.hex *.bin pff/*.o
+	rm -f lib/*.o *.o *.elf *.hex *.bin lib/pff/*.o
 
 flash:
 	avrdude -p ${CHIP} -c usbasp -Uflash:w:${APP}.hex

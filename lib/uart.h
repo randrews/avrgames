@@ -1,7 +1,7 @@
 #ifndef UART_H
 #define UART_H
 
-#include "pins.h"
+#include "../pins.h"
 #include <stdlib.h> 
 #include <avr/io.h>
 #include <util/delay.h>
