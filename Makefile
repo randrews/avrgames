@@ -1,7 +1,7 @@
 CHIP=atmega1284p
 MHZ=20
 UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/uart lib/ram lib/lcd
-APP=tinysd
+APP=columns
 ##########
 
 GCC_ARGS=-mmcu=${CHIP} -Os -DF_CPU=${MHZ}000000 -std=gnu99 -Ipff/

@@ -240,6 +240,19 @@ void lcd_hline(int x0, int x1, int y, uint16_t color){
     lcdselect(1, 0);    
 }
 
+void lcd_vline(int x, int y0, int y1, uint16_t color){
+    lcd_window(x, y0, x, y1);
+    lcdselect(0, 1);
+    byte h = color >> 8;
+
+    for(int n=y0; n <= y1; n++){
+        spi(h);
+        spi(color);
+    }
+
+    lcdselect(1, 0);    
+}
+
 void lcd_rect(int left, int top, int right, int bottom, uint16_t color){
     lcd_window(left, top, right, bottom);
     lcdselect(0, 1);
@@ -265,17 +278,29 @@ void lcd_blit(int x, int y, int w, int h,
     byte col0_h = col0 >> 8;
     byte col1_h = col1 >> 8;
 
-    for(int n = 0; n < w*h / 8; n++){
-        byte b = bitmap[n];
+    int byte_num = 0;
+    int bit = 7;
+    byte current_byte = *bitmap;
+    int current_column = 0;
+    int current_row = 0;
 
-        for(int bit = 7; bit >= 0; bit--){
-            if(b & (1 << bit)){
-                spi(col1_h);
-                spi(col1);
-            } else {
-                spi(col0_h);
-                spi(col0);
-            }
+    while(1){
+        if(current_byte & (1 << bit)){
+            spi(col1_h);
+            spi(col1);
+        } else {
+            spi(col0_h);
+            spi(col0);
+        }
+
+        if(++current_column >= w){
+            if(++current_row >= h) break;
+            current_column = 0;
+            bit = 7;
+            current_byte = bitmap[++byte_num];
+        } else if(--bit < 0){
+            bit = 7;
+            current_byte = bitmap[++byte_num];
         }
     }
 
