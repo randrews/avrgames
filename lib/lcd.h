@@ -18,6 +18,6 @@ void lcd_hline(int x0, int x1, int y, uint16_t col);
 void lcd_vline(int x, int y0, int y1, uint16_t col);
 void lcd_rect(int left, int top, int right, int bottom, uint16_t color);
 
-void lcd_blit(int x, int y, int w, int h, byte *bitmap, uint16_t col0, uint16_t col1, byte drawmode);
+void lcd_blit(int x, int y, int w, int h, const byte *bitmap, uint16_t col0, uint16_t col1, byte progmem);
 
 #endif

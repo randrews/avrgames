@@ -268,8 +268,8 @@ void lcd_rect(int left, int top, int right, int bottom, uint16_t color){
 }
 
 void lcd_blit(int x, int y, int w, int h,
-              byte *bitmap,
-              uint16_t col0, uint16_t col1, byte drawmode){
+              const byte *bitmap,
+              uint16_t col0, uint16_t col1, byte progmem){
 
     lcd_window(x, y, x+w-1, y+h-1);
 
@@ -280,9 +280,14 @@ void lcd_blit(int x, int y, int w, int h,
 
     int byte_num = 0;
     int bit = 7;
-    byte current_byte = *bitmap;
+    byte current_byte = 0;
     int current_column = 0;
     int current_row = 0;
+
+    if(progmem)
+        current_byte = pgm_read_byte(bitmap);
+    else
+        current_byte = *bitmap;
 
     while(1){
         if(current_byte & (1 << bit)){
@@ -297,10 +302,18 @@ void lcd_blit(int x, int y, int w, int h,
             if(++current_row >= h) break;
             current_column = 0;
             bit = 7;
-            current_byte = bitmap[++byte_num];
+
+            if(progmem)
+                current_byte = pgm_read_byte(bitmap + (++byte_num));
+            else
+                current_byte = bitmap[++byte_num];
         } else if(--bit < 0){
             bit = 7;
-            current_byte = bitmap[++byte_num];
+
+            if(progmem)
+                current_byte = pgm_read_byte(bitmap + (++byte_num));
+            else
+                current_byte = bitmap[++byte_num];
         }
     }
 
