@@ -22,21 +22,6 @@ int main(){
     return 0;
 }
 
-byte sq[] = {
-    0b11111111, 0b11110000,
-    0b10000000, 0b00010000,
-    0b10111111, 0b11010000,
-    0b10100000, 0b01010000,
-    0b10101111, 0b01010000,
-    0b10101001, 0b01010000,
-    0b10101001, 0b01010000,
-    0b10101111, 0b01010000,
-    0b10100000, 0b01010000,
-    0b10111111, 0b11010000,
-    0b10000000, 0b00010000,
-    0b11111111, 0b11110000,
-};
-
 void drawFrame(){
     lcd_rect(0, 0, 319, 239, 0); // Clear the screen to black
 
@@ -64,5 +49,10 @@ void drawFrame(){
     lcd_vline(226, 0, 239, lcd_color(0, 64, 192));
     lcd_vline(227, 0, 239, lcd_color(0, 64, 192));
 
-    lcd_blit(10, 10, 12, 12, sq, 0, lcd_color(255, 0, 0), 1);
+    lcd_blit(10, 10, 12, 12, Pieces, 0, lcd_color(255, 0, 0), 1);
+    lcd_blit(22, 10, 12, 12, Pieces+24, 0, lcd_color(0, 255, 0), 1);
+    lcd_blit(34, 10, 12, 12, Pieces+48, 0, lcd_color(0, 0, 255), 1);
+    lcd_blit(46, 10, 12, 12, Pieces+72, 0, lcd_color(255, 255, 0), 1);
+    lcd_blit(58, 10, 12, 12, Pieces+96, 0, lcd_color(0, 255, 255), 1);
+    lcd_blit(70, 10, 12, 12, Pieces+120, 0, lcd_color(255, 255, 255), 1);
 }

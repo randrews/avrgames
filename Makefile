@@ -1,6 +1,6 @@
 CHIP=atmega1284p
 MHZ=20
-UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/uart lib/ram lib/lcd
+UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/uart lib/ram lib/lcd bmp
 APP=columns
 ##########
 
