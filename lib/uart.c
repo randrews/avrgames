@@ -1,28 +1,28 @@
 #include "uart.h"
 
 void initUSART(){
-    UBRR0H = UBRRH_VALUE; /* defined in setbaud.h */
-    UBRR0L = UBRRL_VALUE;
+    UBRR1H = UBRRH_VALUE; /* defined in setbaud.h */
+    UBRR1L = UBRRL_VALUE;
 
 #if USE_2X
-    UCSR0A |= (1 << U2X0);
+    UCSR1A |= (1 << U2X1);
 #else
-    UCSR0A &= ~(1 << U2X0);
+    UCSR1A &= ~(1 << U2X1);
 #endif
 
-    UCSR0B = (1 << TXEN0) | (1 << RXEN0); /* Enable USART transmitter/receiver */
-    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); /* 8 data bits, 1 stop bit */
+    UCSR1B = (1 << TXEN1) | (1 << RXEN1); /* Enable USART transmitter/receiver */
+    UCSR1C = (1 << UCSZ11) | (1 << UCSZ10); /* 8 data bits, 1 stop bit */
 }
 
 void transmitByte(uint8_t data) {
     /* Wait for empty transmit buffer */
-    loop_until_bit_is_set(UCSR0A, UDRE0);
-    UDR0 = data; /* send data */
+    loop_until_bit_is_set(UCSR1A, UDRE1);
+    UDR1 = data; /* send data */
 }
 
 uint8_t receiveByte(void) {
-  loop_until_bit_is_set(UCSR0A, RXC0); /* Wait for incoming data */
-  return UDR0; /* return register value */
+  loop_until_bit_is_set(UCSR1A, RXC1); /* Wait for incoming data */
+  return UDR1; /* return register value */
 }
 
 void printString(const char myString[]) {

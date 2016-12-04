@@ -7,7 +7,7 @@
 
 typedef unsigned char byte;
 
-void initSPI(int fast);
+void initSPI();
 byte spi(byte b);
 
 #endif

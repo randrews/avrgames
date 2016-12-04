@@ -1,7 +1,8 @@
-CHIP=atmega1284p
-MHZ=20
-UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/uart lib/ram lib/lcd bmp
+CHIP=atmega32u4
+MHZ=16
+UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/uart
 APP=columns
+CABLE=usbasp
 ##########
 
 GCC_ARGS=-mmcu=${CHIP} -Os -DF_CPU=${MHZ}000000 -std=gnu99 -Ipff/
@@ -28,5 +29,5 @@ clean:
 	rm -f lib/*.o *.o *.elf *.hex *.bin lib/pff/*.o
 
 flash:
-	avrdude -p ${CHIP} -c usbasp -Uflash:w:${APP}.hex
+	avrdude -p ${CHIP} -c ${CABLE} -Uflash:w:${APP}.hex
 

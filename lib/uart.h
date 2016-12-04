@@ -1,6 +1,8 @@
 #ifndef UART_H
 #define UART_H
 
+#define BAUD 9600
+
 #include "../pins.h"
 #include <stdlib.h> 
 #include <avr/io.h>
@@ -17,4 +19,3 @@ void printInt(int a);
 void printHex(unsigned char a);
 
 #endif
-

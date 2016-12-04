@@ -1,4 +1,5 @@
 #include "sd.h"
+#include "uart.h"
 
 volatile uint8_t *sd_port;
 int sd_bit;
