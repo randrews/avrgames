@@ -1,6 +1,6 @@
 CHIP=atmega32u4
 MHZ=16
-UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/uart
+UTILS=lib/spi lib/sd lib/pff/diskio lib/pff/pff lib/usb_serial # lib/uart
 APP=columns
 CABLE=usbasp
 ##########
